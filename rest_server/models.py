@@ -7,6 +7,11 @@ class FileModel(models.Model):
         db_table = 'file'
 
     title = models.CharField(max_length=512)
+    is_upload_qiniu = models.BooleanField(default=False)
 
 
-admin.site.register(FileModel)
+class FileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'is_upload_qiniu')
+
+
+admin.site.register(FileModel, FileAdmin)

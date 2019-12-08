@@ -121,7 +121,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+# RSETFramework
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+# QiNiu
+QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY')
+QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY')
+QINIU_BUCKET = os.environ.get('QINIU_BUCKET')
