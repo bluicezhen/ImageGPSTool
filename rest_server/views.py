@@ -1,4 +1,3 @@
-from rest_framework.response import Response
 from rest_framework import mixins, viewsets
 from rest_server import models, serializers, settings
 from qiniu import Auth as QiniuAuth
