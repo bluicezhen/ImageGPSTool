@@ -5,4 +5,4 @@ from rest_server import models
 class FileSerializers(serializers.ModelSerializer):
     class Meta:
         model = models.FileModel
-        fields = ('title', )
+        fields = ('id', 'title')

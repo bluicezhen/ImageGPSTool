@@ -12,7 +12,7 @@ class FileViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
         # Generate Qiniu Upload key
         q = QiniuAuth(settings.QINIU_ACCESS_KEY, settings.QINIU_SECRET_KEY)
-        key = response.data["title"]
+        key = response.data["id"]
         response.data['qiniu_upload_token'] = q.upload_token(settings.QINIU_BUCKET, key, 3600)
 
         return response

@@ -45,12 +45,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'rest_server.urls'
@@ -132,7 +132,7 @@ REST_FRAMEWORK = {
 
 # CORS
 if DEBUG:
-    CORS_ORIGIN_WHITELIST = ["http://localhost:8080"]
+    CORS_ORIGIN_ALLOW_ALL = True
 
 # QiNiu
 QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY')
