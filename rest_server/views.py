@@ -3,9 +3,14 @@ from rest_server import models, serializers, settings
 from qiniu import Auth as QiniuAuth
 
 
-class FileViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class FileViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     queryset = models.FileModel.objects.all()
     serializer_class = serializers.FileSerializers
+
+    def get_serializer_class(self):
+        if self.action == "update" or self.action == "partial_update":
+            return serializers.FileUpdateSerializers
+        return serializers.FileSerializers
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
