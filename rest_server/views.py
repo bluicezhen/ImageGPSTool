@@ -3,8 +3,8 @@ from rest_server import models, serializers, settings
 from qiniu import Auth as QiniuAuth
 
 
-class FileViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
-    queryset = models.FileModel.objects.all()
+class FileViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
+    queryset = models.FileModel.objects.filter(is_upload_qiniu=True).all()
     serializer_class = serializers.FileSerializers
 
     def get_serializer_class(self):
