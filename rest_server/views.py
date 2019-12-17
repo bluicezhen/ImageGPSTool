@@ -4,13 +4,18 @@ from qiniu import Auth as QiniuAuth
 
 
 class FileViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
-    queryset = models.FileModel.objects.filter(is_upload_qiniu=True).all()
+    queryset = models.FileModel.objects.all()
     serializer_class = serializers.FileSerializers
 
     def get_serializer_class(self):
         if self.action == "update" or self.action == "partial_update":
             return serializers.FileUpdateSerializers
         return serializers.FileSerializers
+
+    def get_queryset(self):
+        if self.action == "list":
+            return models.FileModel.objects.filter(is_upload_qiniu=True).all()
+        return models.FileModel.objects.all()
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
