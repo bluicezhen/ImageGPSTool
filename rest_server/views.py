@@ -24,7 +24,8 @@ class FileViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateM
         q = QiniuAuth(settings.QINIU_ACCESS_KEY, settings.QINIU_SECRET_KEY)
         data = response.data
         for item in data["results"]:
-            base_url = f"http://ifs-test.zlb37.xyz/{item['id']}"
+            # Need set image style in qiniu to get thumbnail
+            base_url = f"http://ifs-test.zlb37.xyz/{item['id']}-300px"
             image_url = q.private_download_url(base_url, expires=3600)
             item["url"] = image_url
             

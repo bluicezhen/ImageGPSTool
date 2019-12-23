@@ -6,6 +6,9 @@ class FileModel(models.Model):
     class Meta:
         db_table = 'file'
 
+    # TODO: Add EXIF Information
+    # TODO: Add Upload time
+
     title = models.CharField(max_length=512)
     is_upload_qiniu = models.BooleanField(default=False)
 
