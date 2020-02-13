@@ -25,6 +25,7 @@ class FileViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateM
         data = response.data
         for item in data["results"]:
             # Need set image style in qiniu to get thumbnail
+            # https://developer.qiniu.com/kodo/kb/4069/take-pictures-style-file-authorization-private-space
             base_url = f"http://ifs-test.zlb37.xyz/{item['id']}-300px"
             image_url = q.private_download_url(base_url, expires=3600)
             item["url"] = image_url
