@@ -1,4 +1,2 @@
-.idea/
-.vscode/
 *.pyc
-*.sqlite3
+.idea/
