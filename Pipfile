@@ -8,7 +8,6 @@ currently = {git = "https://github.com/tkrajina/gpxpy.git",ref = "29911dbf10db0f
 click = "*"
 piexif = "*"
 pillow = "*"
-coordtransform = "*"
 mapdatumtrans = "*"
 
 [dev-packages]

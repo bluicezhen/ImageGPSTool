@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "97f7c0ae698cef0bbc715286410f93a01ef6c1841c206c8891ae7aa201b16457"
+            "sha256": "fb601258127f8d3b9681f5135de2533994ca27940507c3befe334b2de066758c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -24,23 +24,16 @@
             "index": "pypi",
             "version": "==7.1.2"
         },
-        "coordtransform": {
-            "hashes": [
-                "sha256:78bcb98e91b3c65ccbc29b31c23dab6a0d54c41179accf470870205943d1343c"
-            ],
-            "index": "pypi",
-            "version": "==0.1.3"
-        },
         "currently": {
             "git": "https://github.com/tkrajina/gpxpy.git",
             "ref": "29911dbf10db0f40e6bc8ac1f719e30cc47677ed"
         },
         "mapdatumtrans": {
             "hashes": [
-                "sha256:ff4ee65ee8baf5f502f764b9c6648bae84c069b2bc40652f901c3ea7b76fbb7a"
+                "sha256:16fb3da36088cc52d289d7fa04c462df98e4f688a88aa252e89fc75bf882feca"
             ],
             "index": "pypi",
-            "version": "==0.1.1"
+            "version": "==1.0.0"
         },
         "piexif": {
             "hashes": [

@@ -1,14 +1,14 @@
 import argparse
 
+import MapDatumTrans
+
 from tools.dms_dd import dd2dms
 from tools.image_gps import modify_image_gps
-from tools.wgs84_to_gcj02 import wgs84_to_gcj02
 
 
 def write_gps_info_to_img_file(args):
-    print(args.to_gcj02)
     if args.to_gcj02:
-        latitude, longitude = wgs84_to_gcj02(args.latitude, args.longitude)
+        latitude, longitude = MapDatumTrans.wgs84_to_gcj02(args.latitude, args.longitude)
     else:
         latitude = args.latitude
         longitude = args.longitude
