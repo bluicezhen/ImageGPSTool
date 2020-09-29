@@ -3,6 +3,7 @@ import piexif
 
 
 def modify_image_gps(file_path: str,
+                     file_save_path: str,
                      gps_latitude_ref: str,
                      gps_latitude_degrees: int,
                      gps_latitude_minutes: int,
@@ -26,4 +27,5 @@ def modify_image_gps(file_path: str,
 
     exif_bytes = piexif.dump(exif_dict)
     im = Image.open(file_path)
-    im.save("out.jpg", exif=exif_bytes)
+
+    im.save(file_save_path, exif=exif_bytes)
