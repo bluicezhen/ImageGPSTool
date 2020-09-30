@@ -14,14 +14,18 @@ def write_gps_info_to_img_file(args):
     file_full_path = f'{working_directory}/{file_name}'
     file_save_path = f'{save_directory}/{file_name}'
 
-    os.path.isdir(save_directory)
-    os.mkdir(save_directory)
+    if not os.path.isdir(save_directory):
+        os.mkdir(save_directory)
 
-    if args.to_gcj02:
+    if args.wgs84_to_gcj02:
         latitude, longitude = MapDatumTrans.wgs84_to_gcj02(args.latitude, args.longitude)
+    elif args.gcj02_to_wgs84:
+        latitude, longitude = MapDatumTrans.gcj02_to_wgs84(args.latitude, args.longitude)
     else:
         latitude = args.latitude
         longitude = args.longitude
+
+    print(f'Final location: {latitude}, {longitude}')
 
     # DD to DMS
     north_or_south, longitude_degrees, longitude_minutes, longitude_seconds, east_or_west, latitude_degrees, \

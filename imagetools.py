@@ -21,9 +21,12 @@ if __name__ == '__main__':
                                 metavar='',
                                 required=True,
                                 help='Decimal degrees longitude, such as: 114.219687')
-    parser_wgpsimg.add_argument('-tg', '--to-gcj02',
+    parser_wgpsimg.add_argument('-w2g', '--wgs84-to-gcj02',
                                 action='store_true',
                                 help='Whether convert the GPS info from WGS84 to GCJ02')
+    parser_wgpsimg.add_argument('-g2w', '--gcj02-to-wgs84',
+                                action='store_true',
+                                help='Whether convert the GPS info from GCJ02 to WGS84')
     parser_wgpsimg.set_defaults(func=write_gps_info_to_img_file)
 
     # ------- SUB COMMAND for Turn WGS84 GPX file to GCJ02 GPX file. ---------------------------------------------------

@@ -4,11 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-currently = {git = "https://github.com/tkrajina/gpxpy.git",ref = "29911dbf10db0f40e6bc8ac1f719e30cc47677ed"}
 click = "*"
 piexif = "*"
-pillow = "*"
-mapdatumtrans = "*"
+mapdatumtrans = "==1.0.1"
 
 [dev-packages]
 
