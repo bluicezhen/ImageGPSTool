@@ -7,7 +7,7 @@ if __name__ == '__main__':
     subparsers = parser.add_subparsers(help='sub-command help')
 
     # ------- SUB COMMAND for Write GPS information to image file. -----------------------------------------------------
-    parser_wgpsimg = subparsers.add_parser('wgpsimg', help='Write GPS information to image file.',
+    parser_wgpsimg = subparsers.add_parser('write_gps', help='Write GPS information to image file.',
                                            usage='%(prog)s xxx.jpeg [options]')
     parser_wgpsimg.add_argument('image',
                                 help='A image file, such as my_photo.jpg')
