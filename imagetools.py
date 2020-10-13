@@ -1,5 +1,5 @@
 import argparse
-from controllers import write_gps_info_to_img_file
+from controllers import write_gps_info_to_img_file, write_gps_info_to_img_file_by_kml
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='imagetools')
@@ -29,9 +29,15 @@ if __name__ == '__main__':
                                 help='Whether convert the GPS info from GCJ02 to WGS84')
     parser_wgpsimg.set_defaults(func=write_gps_info_to_img_file)
 
-    # ------- SUB COMMAND for Turn WGS84 GPX file to GCJ02 GPX file. ---------------------------------------------------
-    parser_gpxw2g = subparsers.add_parser('gpxw2g', help='Turn WGS84 GPX file to GCJ02 GPX file.')
-    parser_gpxw2g.add_argument('--baz', choices='XYZ', help='baz help')
+    # ------- SUB COMMAND for Write GPS information to image file by KML file. -----------------------------------------
+    parser_gpxw2g = subparsers.add_parser('write_kml', help='Write GPS information to image file by kml file.')
+    parser_gpxw2g.add_argument('image',
+                               help='A image file, such as my_photo.jpg')
+    parser_gpxw2g.add_argument('-k', '--kml',
+                               metavar='',
+                               required=True,
+                               help='A kml file, like my_travel.kml')
+    parser_gpxw2g.set_defaults(func=write_gps_info_to_img_file_by_kml)
 
     args = parser.parse_args()
     if hasattr(args, 'func'):
