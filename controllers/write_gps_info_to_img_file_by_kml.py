@@ -1,11 +1,7 @@
-import ntpath
-import os
-
 from dateutil.parser import parse as datetime_parse
 import xmltodict
 
-from tools.dms_dd import dd2dms
-from tools.image_gps import get_image_create_time, modify_image_gps
+from tools.image_gps import get_image_create_time, write_gps_to_image
 
 
 def write_gps_info_to_img_file_by_kml(args):
@@ -36,27 +32,5 @@ def write_gps_info_to_img_file_by_kml(args):
         longitude = float(image_location_origin[0])
         latitude = float(image_location_origin[1])
 
-        # DD to DMS
-        north_or_south, longitude_degrees, longitude_minutes, longitude_seconds, east_or_west, latitude_degrees, \
-            latitude_minutes, latitude_seconds = dd2dms(latitude, longitude)
-
-        working_directory = os.getcwd()
-        save_directory = f'{working_directory}/output'
-        file_name = ntpath.basename(args.image)
-        file_full_path = f'{working_directory}/{file_name}'
-        file_save_path = f'{save_directory}/{file_name}'
-        if not os.path.isdir(save_directory):
-            os.mkdir(save_directory)
-
         # Write GPS information to new image file
-        modify_image_gps(
-            file_full_path,
-            file_save_path,
-            north_or_south,
-            latitude_degrees,
-            latitude_minutes,
-            round(latitude_seconds * 100),
-            east_or_west,
-            longitude_degrees,
-            longitude_minutes,
-            round(longitude_seconds * 100))
+        write_gps_to_image(args.image, latitude, longitude)

@@ -1,35 +1,38 @@
+import ntpath
+import os
 from datetime import datetime
 from time import strftime
 
 import piexif
 
+from tools.dms_dd import dd2dms
 
-def modify_image_gps(file_path: str,
-                     file_save_path: str,
-                     gps_latitude_ref: str,
-                     gps_latitude_degrees: int,
-                     gps_latitude_minutes: int,
-                     gps_latitude_seconds_100: int,
-                     gps_longitude_ref: str,
-                     longitude_degrees: int,
-                     longitude_minutes: int,
-                     longitude_seconds_100: int):
+
+def write_gps_to_image(image_path: str, latitude: float, longitude: float):
     """Modify image's GPS info. if image's doesn't has GPS info, this function will insert it."""
+    image_dir_path = os.path.dirname(image_path)
+    image_save_dir_path = image_dir_path + '/output'
+    image_save_path = ntpath.basename(image_path)
 
-    exif_dict = piexif.load(file_path)
+    if not os.path.isdir(image_save_dir_path):
+        os.mkdir(image_save_dir_path)
 
-    exif_dict['GPS'][piexif.GPSIFD.GPSLatitudeRef] = gps_latitude_ref
-    exif_dict['GPS'][piexif.GPSIFD.GPSLatitude] = ((gps_latitude_degrees, 1),
-                                                   (gps_latitude_minutes, 1),
-                                                   (gps_latitude_seconds_100, 100))
-    exif_dict['GPS'][piexif.GPSIFD.GPSLongitudeRef] = gps_longitude_ref
+    exif_dict = piexif.load(image_path)
+    north_or_south, longitude_degrees, longitude_minutes, longitude_seconds, east_or_west, latitude_degrees, \
+        latitude_minutes, latitude_seconds = dd2dms(latitude, longitude)
+
+    exif_dict['GPS'][piexif.GPSIFD.GPSLatitudeRef] = north_or_south
+    exif_dict['GPS'][piexif.GPSIFD.GPSLatitude] = ((latitude_degrees, 1),
+                                                   (latitude_minutes, 1),
+                                                   (round(latitude_seconds * 100), 100))
+    exif_dict['GPS'][piexif.GPSIFD.GPSLongitudeRef] = east_or_west
     exif_dict['GPS'][piexif.GPSIFD.GPSLongitude] = ((longitude_degrees, 1),
                                                     (longitude_minutes, 1),
-                                                    (longitude_seconds_100, 100))
+                                                    (round(longitude_seconds * 100), 100))
 
     exif_bytes = piexif.dump(exif_dict)
 
-    piexif.insert(exif_bytes, file_path, file_save_path)
+    piexif.insert(exif_bytes, image_path, image_save_path)
 
 
 def get_image_create_time(file_path):
