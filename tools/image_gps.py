@@ -1,5 +1,7 @@
-import piexif
 from datetime import datetime
+from time import strftime
+
+import piexif
 
 
 def modify_image_gps(file_path: str,
@@ -41,7 +43,12 @@ def get_image_create_time(file_path):
     # 0x9011 36881: Offset Time Original
     # 0x9012 36882: Offset Time Digitized
     # 36880 for use as image create time offset
-    create_time_offset_s: str = exif_dict['Exif'][36880].decode('ascii').replace(':', '')
+    try:
+        create_time_offset_s: str = exif_dict['Exif'][36880].decode('ascii').replace(':', '')
+    except KeyError:
+        # Pictures taken by the some camera like Panasonic G85 doesn't write timezone information to image file. In this
+        # case, use local timezone.
+        create_time_offset_s = strftime("%z")
 
     create_time = datetime.strptime(f'{create_time_s} {create_time_offset_s}', '%Y:%m:%d %H:%M:%S %z')
 
