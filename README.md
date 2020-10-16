@@ -1,36 +1,16 @@
-# GPX File in China
+# ImageGPSTools
 
-> GPX文件中国大陆偏移处理程序
+[中文](./README-cn.md)
 
-## 1. 简介
+> ImageGPSTools is a simple command line tool for write GPS information to image's EXIF which depended Python3.
 
-中国大陆地区使用的坐标系为**WGS84**，而大部分GPS设备输出的坐标系为**GCJ02**，这就导致了设备导出GPX文件在大陆有一定的偏移现象，原来是想写GUI的，但是GUI不跨平台，我又懒得写，Swift又反人类，就写Python了。
+## 1. Install
 
-![WGS84](img/1.png)
+> The sample is for reference only. It's worked on MacOS 10.15.7
 
-![GCJ02](img/2.png)
+## 1.1. Install dependencies
 
-## 2. 安装
-
-环境：`Python 3.6+`
-
-安装依赖
-
-- 使用`pipenv`
-    
-    ```bash
-    pipenv install
-    ```
-
-## 3. 使用
-
-```bash
-python --f 001.gpx --t 001_china.gpx
+```shell
+pip install requirement.txt
+ln -s $(greadlink -f ./imagetools.sh) /usr/local/bin/imagetools
 ```
-
-会读取`001.gpx`，转换后写入`001_china.gpx`
-
-## 4. 鸣谢
-
-    虽然在依赖里没有，但本程序使用了[scateu/PyWGS84ToGCJ02](https://github.com/scateu/PyWGS84ToGCJ02)的部分代码，感谢。
-
