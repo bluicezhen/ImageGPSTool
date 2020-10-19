@@ -13,17 +13,21 @@ ln -s $(greadlink -f ./imagetools.sh) /usr/local/bin/imagetools
 
 ## 2. 使用
 
-- 通过经纬度写入文件
+- 通过经纬度写入
 
   ```shell
-  imagetools write_gps test.jpg -la 23.542565 -lo 3.926506
+  imagetools write_gps ./test.jpg -la 23.542565 -lo 3.926506
   ```
 
   如果坐标是GCJ02坐标系的，可以在写入时转换为WGS84坐标系
 
   ```shell
-  imagetools write_gps test.jpg -la 23.542565 -lo 3.926506 -g2w
+  imagetools write_gps ./test.jpg -la 23.542565 -lo 3.926506 -g2w
   ```
+  
+- 通过KML文件写入
 
-  ​	
+	```shell
+	imagetools write_gps ./test.jpg -k ./test.kml
+	```
 
