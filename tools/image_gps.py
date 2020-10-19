@@ -12,7 +12,7 @@ def write_gps_to_image(image_path: str, latitude: float, longitude: float):
     """Modify image's GPS info. if image's doesn't has GPS info, this function will insert it."""
     image_dir_path = os.path.dirname(image_path)
     image_save_dir_path = image_dir_path + '/output'
-    image_save_path = ntpath.basename(image_path)
+    image_save_path = f'{image_save_dir_path}/{ntpath.basename(image_path)}'
 
     if not os.path.isdir(image_save_dir_path):
         os.mkdir(image_save_dir_path)

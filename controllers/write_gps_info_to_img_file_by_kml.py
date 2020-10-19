@@ -22,6 +22,7 @@ def write_gps_info_to_img_file_by_kml(args):
                     exit(1)
             if image_create_timestamp <= node_timestamp:
                 image_location = origin_location_list[i]
+                break
             i += 1
 
         if image_location == '':
