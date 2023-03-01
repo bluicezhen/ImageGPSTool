@@ -1,5 +1,5 @@
 import argparse
-from controllers import write_gps_info_to_img_file, write_gps_info_to_img_file_by_kml
+from controllers import write_gps_info_to_img_file, write_gps_info_to_img_file_by_kml, get_gps_from_image_file
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='imagetools')
@@ -38,6 +38,17 @@ if __name__ == '__main__':
                                required=True,
                                help='A kml file, like my_travel.kml')
     parser_gpxw2g.set_defaults(func=write_gps_info_to_img_file_by_kml)
+
+    # ------- Get GSP info from image file -----------------------------------------------------------------------------
+    parser_ggps = subparsers.add_parser('get_gps', help='Get GSP info from image file')
+    parser_ggps.add_argument('image',
+                                help='A image file, such as my_photo.jpg')
+    parser_ggps.add_argument('-o', '--output',
+                                type=str,
+                                metavar='',
+                                required=False,
+                                help='Output format. One of: (google)')
+    parser_ggps.set_defaults(func=get_gps_from_image_file)
 
     args = parser.parse_args()
     if hasattr(args, 'func'):

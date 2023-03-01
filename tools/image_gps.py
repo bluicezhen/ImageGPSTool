@@ -34,6 +34,22 @@ def write_gps_to_image(image_path: str, latitude: float, longitude: float):
 
     piexif.insert(exif_bytes, image_path, image_save_path)
 
+def get_gps_from_image(image_path: str):
+    exif_data = piexif.load(image_path)
+
+    gps_ifd = exif_data['GPS']
+    latitude = gps_ifd.get(piexif.GPSIFD.GPSLatitude)
+    longitude = gps_ifd.get(piexif.GPSIFD.GPSLongitude)
+    latitude_ref = gps_ifd.get(piexif.GPSIFD.GPSLatitudeRef)
+    longitude_ref = gps_ifd.get(piexif.GPSIFD.GPSLongitudeRef)
+    
+    lat_dms = [float(x) / float(y) for x, y in latitude]
+    lon_dms = [float(x) / float(y) for x, y in longitude]
+    lat_ref = latitude_ref.decode('utf-8')
+    lon_ref = longitude_ref.decode('utf-8')
+
+    return lat_dms, lat_ref, lon_dms, lon_ref 
+
 
 def get_image_create_time(file_path):
     exif_dict = piexif.load(file_path)
@@ -56,3 +72,7 @@ def get_image_create_time(file_path):
     create_time = datetime.strptime(f'{create_time_s} {create_time_offset_s}', '%Y:%m:%d %H:%M:%S %z')
 
     return create_time
+
+
+if __name__ == '__main__':
+    get_gps_from_image('./test.jpeg')
