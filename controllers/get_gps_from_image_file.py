@@ -9,6 +9,9 @@ def get_gps_from_image_file(args):
         if args.output == 'google':
             print(f'https://www.google.com/maps/search/?api=1&query={lat}%2c{lon}')
             return
+        elif args.output == 'gaode':
+            print(f'https://uri.amap.com/marker?position={lon},{lat}')
+            return
         else:
             print(f'Error: Unknow output format')
 

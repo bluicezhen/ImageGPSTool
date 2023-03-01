@@ -1,7 +1,7 @@
 #!/bin/bash
 export PIPENV_IGNORE_VIRTUALENVS=1
 
-IMAGETOOLS_PATH=$(greadlink -f "$0")
+IMAGETOOLS_PATH=$(readlink -f "$0")
 IMAGETOOLS_DIR=$(dirname "$IMAGETOOLS_PATH")
 
 PYTHON_INTERPRETER=$(cd "$IMAGETOOLS_DIR" && pipenv --py)
