@@ -4,11 +4,9 @@
 
 ## 1. 安装
 
-> 在`MacOS 10.15.7`测试通过，其他系统请自己想办法。
-
 ```shell
 pip install requirement.txt
-ln -s $(greadlink -f ./imagetools.sh) /usr/local/bin/imagetools
+ln -s $(readlink -f ./imagetools.sh) /usr/local/bin/imagetools
 ```
 
 ## 2. 使用
@@ -31,3 +29,14 @@ ln -s $(greadlink -f ./imagetools.sh) /usr/local/bin/imagetools
 	imagetools write_gps ./test.jpg -k ./test.kml
 	```
 
+- 获图片经纬度信息
+
+  ```shell
+  imagetools get_gps ./test.jpg
+  ```
+
+- 获取地图链接（支持 Google Map (google) 和高德地图(gaode)）
+
+  ```shell
+  imagetools get_gps -o gaode
+  ```
