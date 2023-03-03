@@ -1,9 +1,10 @@
 import ntpath
+import piexif
 import os
 from datetime import datetime
+from struct import error as StructError
 from time import strftime
 
-import piexif
 
 from tools.dms_dd import dd2dms
 
@@ -35,7 +36,11 @@ def write_gps_to_image(image_path: str, latitude: float, longitude: float):
     piexif.insert(exif_bytes, image_path, image_save_path)
 
 def get_gps_from_image(image_path: str):
-    exif_data = piexif.load(image_path)
+    try:
+        exif_data = piexif.load(image_path)
+    except StructError:
+        print(f'Error: The file {image_path} could not obtain valid EXIF data')
+        exit(1)
 
     gps_ifd = exif_data['GPS']
     latitude = gps_ifd.get(piexif.GPSIFD.GPSLatitude)
