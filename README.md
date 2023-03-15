@@ -42,3 +42,6 @@ ln -s $(greadlink -f ./imagetools.sh) /usr/local/bin/imagetools
   ```shell
   imagetools get_gps -o gaode ./test.jpg
   ```
+
+- While viewing the photos using applications like Preview or Adobe Bridge, I noticed that they contain GPS information. However, I encountered an error while trying to perform relevant operations: Error: The file xxx could not obtain valid EXIF data
+  Reason: Due to the limited support for GPS information in photos with damaged EXIF information by the piexif library used by this program, it may not be able to read or write the GPS information of photos normally. However, we provide a simple solution: open the directory where the photo is located through Adobe Bridge, then right-click the photo that needs to be fixed, select "Export -> Custom Export" to fix the EXIF information of the photo, so that this program can read and write its GPS information correctly.
