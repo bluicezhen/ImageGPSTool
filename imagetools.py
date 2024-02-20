@@ -1,5 +1,10 @@
 import argparse
-from controllers import write_gps_info_to_img_file, write_gps_info_to_img_file_by_kml, get_gps_from_image_file
+from controllers import (
+    write_gps_info_to_img_file, 
+    write_gps_info_to_img_file_by_kml, 
+    get_gps_from_image_file,
+    get_create_time_from_image_file,
+)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='imagetools')
@@ -49,6 +54,16 @@ if __name__ == '__main__':
                                 required=False,
                                 help='Output format. One of: (google)')
     parser_ggps.set_defaults(func=get_gps_from_image_file)
+
+    # ------- Get Create Time info from image file ---------------------------------------------------------------------
+    parser_gct = subparsers.add_parser('get_ct', help='Get Create Time from image file')
+    parser_gct.add_argument('image', help='A image file, such as my_photo.jpg')
+    parser_gct.add_argument('-o', '--output',
+                            type=str,
+                            metavar='',
+                            required=False,
+                            help='Output format, defaut is EXIF.')
+    parser_gct.set_defaults(func=get_create_time_from_image_file)
 
     args = parser.parse_args()
     if hasattr(args, 'func'):

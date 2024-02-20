@@ -35,6 +35,15 @@ def write_gps_to_image(image_path: str, latitude: float, longitude: float):
 
     piexif.insert(exif_bytes, image_path, image_save_path)
 
+def get_create_time_from_image(image_path: str) -> str:
+    try:
+        exif_data = piexif.load(image_path)
+    except StructError:
+        print(f'Error: The file {image_path} could not obtain valid EXIF data')
+        exit(1)
+    
+    return exif_data['Exif'][36867].decode('ascii')
+
 def get_gps_from_image(image_path: str):
     try:
         exif_data = piexif.load(image_path)
